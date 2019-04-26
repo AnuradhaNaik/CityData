@@ -17,7 +17,7 @@ def getLatLng(address,city,state):
     
     return re
 
-def cityDataWebpageToCSV(url):
+def cityDataWebpageToCSV(url,city,state):
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'html.parser')
     all_ = soup.find(class_='tabBlue')
@@ -41,7 +41,7 @@ def cityDataWebpageToCSV(url):
             loc=loc.contents[0]
             print('processing')
             if(it>0):
-                ob=getLatLng(loc.contents[0],'Cincinnati','OH')
+                ob=getLatLng(loc.contents[0],city,state)
                 _writer.writerow([dates.contents[0],loc.contents[0],ob['lat'],ob['lng'],veh.contents[0],dp.contents[0],fat.contents[0],per.contents[0],ped.contents[0]])
             else:
                 _writer.writerow([dates.contents[0],loc,'Latitude','Longitude',veh.contents[0],dp.contents[0],fat.contents[0],per.contents[0],ped.contents[0]])
@@ -51,7 +51,7 @@ def cityDataWebpageToCSV(url):
 
 
 
-cityDataWebpageToCSV('http://www.city-data.com/accidents/acc-Cincinnati-Ohio.html')
+cityDataWebpageToCSV('http://www.city-data.com/accidents/acc-Cincinnati-Ohio.html','Cincinnati','OH')
         
     
     
