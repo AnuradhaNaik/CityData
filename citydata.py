@@ -20,8 +20,8 @@ def getLatLng(address,city,state):
 def cityDataWebpageToCSV(url):
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'html.parser')
-    acc = soup.find(class_='tabBlue')
-    acc_n= acc.find_all('tr')
+    all_ = soup.find(class_='tabBlue')
+    all_rows= all_.find_all('tr')
     it=0
     t=""
 
@@ -30,7 +30,7 @@ def cityDataWebpageToCSV(url):
         _writer = csv.writer(_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
 
-        for a in acc_n:
+        for a in all_rows:
             dates = a.contents[1]
             loc=a.contents[2]
             veh=a.contents[3]
