@@ -17,7 +17,7 @@ def getLatLng(address,city,state):
     
     return re
 
-def cityDataWebpageToCSV(url,city,state):
+def cityDataWebpageToCSV(url,city,state,filename):
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'html.parser')
     all_ = soup.find(class_='tabBlue')
@@ -26,7 +26,7 @@ def cityDataWebpageToCSV(url,city,state):
     t=""
 
 
-    with open('f.csv', mode='w') as _file:
+    with open(filename, mode='w') as _file:
         _writer = csv.writer(_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
 
@@ -51,7 +51,7 @@ def cityDataWebpageToCSV(url,city,state):
 
 
 
-cityDataWebpageToCSV('http://www.city-data.com/accidents/acc-Cincinnati-Ohio.html','Cincinnati','OH')
+cityDataWebpageToCSV('http://www.city-data.com/accidents/acc-Cincinnati-Ohio.html','Cincinnati','OH','f.csv')
         
     
     
